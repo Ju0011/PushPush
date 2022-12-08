@@ -18,6 +18,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Keycode.h">
@@ -32,5 +35,16 @@
     <ClInclude Include="Model.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="BGM.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BGM.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

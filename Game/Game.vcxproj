@@ -146,12 +146,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Keycode.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="View_Start.h" />
     <ClInclude Include="View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="BGM.mp3" />
+    <Media Include="BGM.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
