@@ -4,17 +4,21 @@
 #include <windows.h>
 #include "View_Start.h"
 #include <algorithm>    //배열 복사
+#include "Sound.h"
 
 using namespace std;
 
 int main()
 {
-   
     system("mode con: cols=98 lines=30");   // 화면 크기 조정
     View* view = 0;
     View_Start* start = 0;
-
+    Sound* sound = 0;
+    
+    sound->Play();
+    //sound->mp3Play();
     start->logo();
+    
     start->selectStage();
 
     _setcursortype(_NOCURSOR);
@@ -34,6 +38,8 @@ int main()
     view->drawCharacter(start_x, start_y);
 
     while (exit != true) {
+       
+
         bool move = true;
         int dx = 0, dy = 0;
 
@@ -135,6 +141,7 @@ int main()
             start_y = 4;
             view->show_success(map_number);
         }
-
+        
+        
     }
 }
