@@ -53,7 +53,7 @@ public:
 	}
 
 	void drawCell(int col, int row, int mapData[10][10]) {
-		const char* cellSymbol[] = { " ", "▩", "●", "●", "○", NULL };
+		const char* cellSymbol[] = { " ", "▩", "●", "●", "○", "⚛" };
 		int cell = mapData[row][col];
 
 		switch (cell) {
@@ -62,6 +62,7 @@ public:
 		case    2:    SetColor(RED);         break;  // 움직일 공
 		case 3: SetColor(BLUE); break;	//채워진 공
 		case    4:    SetColor(WHITE);         break;  // 골대
+		case 5: SetColor(YELLOW);         break;
 		}
 
 		gotoxy((MAP_X1 + col + 1) * 2, MAP_Y1 + row + 1);
@@ -105,7 +106,7 @@ public:
 			copy(&mapData_5[0][0], &mapData_5[0][0] + 100, &copy_mapData[0][0]);
 			break;
 		}
-		Inform(50);
+		Inform();
 		drawMap(copy_mapData);
 		map_inform(map_number);
 		drawCharacter(2, 4);
@@ -125,22 +126,22 @@ public:
 		cout << "[ STAGE " << map_number << " ]";
 	}
 
-	int Inform(int start_col) {
+	int Inform() {
 		SetColor(WHITE);
-		putstr(start_col, 5, "┏━━━━━━━━━━━━━━━━┓");
-		putstr(start_col, 6, "┃      Help      ┃");
-		putstr(start_col, 8, "┃↑↓← → : Move┃");
-		putstr(start_col, 10, "┃ N : Next Stage ┃");
-		putstr(start_col, 12, "┃ P : Pre  Stage ┃");
-		putstr(start_col, 14, "┃ Space: Restart ┃");
-		putstr(start_col, 16, "┃ Esc: Game Exit ┃");
-		putstr(start_col, 18, "┗━━━━━━━━━━━━━━━━┛");
+		putstr(60, 5, "┏━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		putstr(60, 6, "┃          Help          ┃");
+		putstr(60, 8, "┃    ↑↓← → : Move    ┃");
+		putstr(60, 10, "┃     N : Next Stage     ┃");
+		putstr(60, 12, "┃     P : Pre  Stage     ┃");
+		putstr(60, 14, "┃     Space: Restart     ┃");
+		putstr(60, 16, "┃      Esc: Game Exit    ┃");
+		putstr(60, 18, "┃  ⚛ : PUSH COUNT RESET  ┃");
+		putstr(60, 20, "┗━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
 		return 0;
 	}
 
 	int success() {
-		//Model* map = 0;
 		for (int row = 0; row < MAP_HEIGHT; ++row) {
 			for (int col = 0; col < MAP_WIDTH; ++col)
 				if (mapData[row][col] == 2 || mapData[row][col] == 4) return 0;
@@ -171,6 +172,9 @@ public:
 		return 0;
 	}
 
-	
-
+	void drawCount(int pushCount) {
+		SetColor(WHITE);
+		gotoxy(40, 8);
+		cout << "PUSH COUNT : " << pushCount << endl;
+	}
 };
