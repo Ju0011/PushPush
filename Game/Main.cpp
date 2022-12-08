@@ -10,6 +10,8 @@ using namespace std;
 
 int main()
 {
+    int pushCount = 0;
+
     system("mode con: cols=98 lines=30");   // 화면 크기 조정
     View* view = 0;
     View_Start* start = 0;
@@ -31,14 +33,15 @@ int main()
     int map_number = start->selectStage();
     view->define_Map(map_number);
 
-    view->Inform(50);
+    view->Inform();
+    
 
     int start_x = 2, start_y = 4;
     int oldx, oldy;
     view->drawCharacter(start_x, start_y);
 
     while (exit != true) {
-       
+        view->drawCount(pushCount);
 
         bool move = true;
         int dx = 0, dy = 0;
@@ -58,6 +61,7 @@ int main()
             view->drawMap(copy_mapData);
             start_x = 2; start_y = 4;
             view->drawCharacter(2, 4);
+            pushCount = 0;
             break;
 
         case N:
@@ -101,11 +105,13 @@ int main()
                 mapData[new_y][new_x] = 0;  //길
                 mapData[new_y + dy][new_x + dx] = 2;    //공
                 view->drawCell(new_x + dx, new_y + dy, mapData);
+                pushCount++;
             }
             else if(mapData[new_y + dy][new_x + dx] == 4) { //골대
                 mapData[new_y][new_x] = 0;  //길
                 mapData[new_y + dy][new_x + dx] = 3;    //채워진 공
                 view->drawCell(new_x + dx, new_y + dy, mapData);
+                pushCount++;
             }
             else if (mapData[new_y + dy][new_x + dx] == 1) {    //벽
                 move = false;
@@ -117,15 +123,20 @@ int main()
                 mapData[new_y][new_x] = 4;  //골대
                 mapData[new_y + dy][new_x + dx] = 2;    // 공
                 view->drawCell(new_x + dx, new_y + dy, mapData);
+                pushCount++;
             }
             else if (mapData[new_y + dy][new_x + dx] == 4) {    // 골대
                 mapData[new_y][new_x] = 4;  //골대
                 mapData[new_y + dy][new_x + dx] = 3;    // 채워진 공
                 view->drawCell(new_x + dx, new_y + dy, mapData);
+                pushCount++;
             }
             else if (mapData[new_y + dy][new_x + dx] == 1) {    //벽
                 move = false;
             }
+            break;
+        case 5:
+            pushCount = 0;
         }
         
         if (move) {
