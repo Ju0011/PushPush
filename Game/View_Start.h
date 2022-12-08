@@ -231,7 +231,7 @@ public:
 
 		gotoxy(38, 20);
 		textbackground(BLACK);
-		printf("  Please press ENTER!  ");
+		cout << "  Please press ENTER!  " << endl;
 		
 		while (getchar() != '\n');
 		system("cls");
