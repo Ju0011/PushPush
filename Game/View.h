@@ -25,11 +25,6 @@ public:
 	}
 
 	// 캐릭터 넣기 위한 함수
-	void xyputstr(int x, int y, const char* str) {
-		gotoxy(x * 2, y);
-		cout << str;
-	}
-
 	void drawCharacter(int col, int row) {
 		gotoxy((MAP_X1 + col + 1) * 2, MAP_Y1 + row + 1);
 		textcolor(BLUE, WHITE);
@@ -41,7 +36,6 @@ public:
 		puts(" ");
 		gotoxy((MAP_X1 + col + 1) * 2, MAP_Y1 + row + 1);
 		puts(" ");
-
 	}
 
 	void drawCell(int col, int row, int mapData[10][10]) {
@@ -72,9 +66,7 @@ public:
 
 	void define_Map(int map_number) {
 		system("cls");
-
-		switch (map_number)
-		{
+		switch (map_number){
 		case 0:
 		case 6:
 			break;
@@ -112,11 +104,6 @@ public:
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 	}
 
-
-	void SetColor(int color) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-	}
-
 	void map_inform(int map_number)
 	{
 		textcolor(GREEN,WHITE);
@@ -126,7 +113,6 @@ public:
 
 	int Inform() {
 		textcolor(GREEN, WHITE);
-		//SetColor(GREEN);
 		putstr(60, 5, "┏━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		putstr(60, 6, "┃          Help          ┃");
 		putstr(60, 8, "┃    ↑↓← → : Move    ┃");
