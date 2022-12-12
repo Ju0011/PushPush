@@ -21,6 +21,7 @@
 #define WHITE 15
 #define GRAY 7
 #define SKY 11
+#define PURPLE 13
 
 #define MAP_WIDTH 10
 #define MAP_HEIGHT 10

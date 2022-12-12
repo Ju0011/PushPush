@@ -10,6 +10,7 @@ using namespace std;
 
 int main()
 {
+
     int pushCount = 0;
 
     system("mode con: cols=98 lines=30");   // 화면 크기 조정
@@ -25,7 +26,6 @@ int main()
 
     _setcursortype(_NOCURSOR);
 
-    textbackground(BLACK);
     clrscr();
 
     bool exit = false;
