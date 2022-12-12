@@ -30,17 +30,9 @@ public:
 		cout << str;
 	}
 
-
-	void fillbox(int x1, int y1, int x2, int y2, int color) {
-		textbackground(color);
-		for (int i = y1; i <= x2; ++i)
-			for (int j = x1; j <= y2; ++j)
-				xyputstr(i, j, " ");
-	}
-
 	void drawCharacter(int col, int row) {
 		gotoxy((MAP_X1 + col + 1) * 2, MAP_Y1 + row + 1);
-		SetColor(YELLOW);
+		textcolor(BLUE, WHITE);
 		puts("★");
 	}
 
@@ -53,23 +45,25 @@ public:
 	}
 
 	void drawCell(int col, int row, int mapData[10][10]) {
-		const char* cellSymbol[] = { " ", "▩", "●", "●", "○", "⚛" };
+
+		const char* cellSymbol[] = { " ", "▩", "●", "●", "○", "♥" };
 		int cell = mapData[row][col];
 
 		switch (cell) {
-		case    0:    textbackground(BLACK);      break;  // 빈공간
-		case    1:    SetColor(GREEN);       break;  // 벽
-		case    2:    SetColor(RED);         break;  // 움직일 공
-		case 3: SetColor(BLUE); break;	//채워진 공
-		case    4:    SetColor(WHITE);         break;  // 골대
-		case 5: SetColor(YELLOW);         break;
+		case    0:    textcolor(WHITE, WHITE);      break;  // 빈공간
+		case    1:    textcolor(GREEN, WHITE);       break;  // 벽
+		case    2:    textcolor(RED, WHITE);       break;  // 움직일 공
+		case 3:textcolor(BLUE, WHITE); break;	//채워진 공
+		case    4:   textcolor(BLACK, WHITE);      break;  // 골대
+		case 5: textcolor(PURPLE, WHITE);        break;		// 아이템
 		}
-
+		
 		gotoxy((MAP_X1 + col + 1) * 2, MAP_Y1 + row + 1);
 		puts(cellSymbol[cell]);
 	}
 
 	void drawMap(int mapData[10][10]) {
+		
 		for (int row = 0; row < MAP_HEIGHT; ++row) {
 			for (int col = 0; col < MAP_WIDTH; ++col)
 				drawCell(col, row, mapData);
@@ -78,7 +72,6 @@ public:
 
 	void define_Map(int map_number) {
 		system("cls");
-		//Model* map = 0;
 
 		switch (map_number)
 		{
@@ -113,7 +106,12 @@ public:
 		
 	}
 
-	
+	void textcolor(int foreground, int background)
+	{
+		int color = foreground + background * 16;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+	}
+
 
 	void SetColor(int color) {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -121,13 +119,14 @@ public:
 
 	void map_inform(int map_number)
 	{
-		SetColor(GREEN);
+		textcolor(GREEN,WHITE);
 		gotoxy(30, 3);
 		cout << "[ STAGE " << map_number << " ]";
 	}
 
 	int Inform() {
-		SetColor(WHITE);
+		textcolor(GREEN, WHITE);
+		//SetColor(GREEN);
 		putstr(60, 5, "┏━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		putstr(60, 6, "┃          Help          ┃");
 		putstr(60, 8, "┃    ↑↓← → : Move    ┃");
@@ -135,7 +134,7 @@ public:
 		putstr(60, 12, "┃     P : Pre  Stage     ┃");
 		putstr(60, 14, "┃     Space: Restart     ┃");
 		putstr(60, 16, "┃      Esc: Game Exit    ┃");
-		putstr(60, 18, "┃  ⚛ : PUSH COUNT RESET  ┃");
+		putstr(60, 18, "┃  ♥ : PUSH COUNT RESET ┃");
 		putstr(60, 20, "┗━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
 		return 0;
@@ -154,8 +153,7 @@ public:
 		system("cls");
 
 		while (getchar() != '\n');
-
-		SetColor(YELLOW);
+		textcolor(YELLOW, WHITE);
 		putstr(32, 5, "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		putstr(32, 7, "┃  *************************  ┃");
 		gotoxy(32, 9); cout << "┃     [ STAGE " << map_number << " ] CLEAR!      ┃";
@@ -173,7 +171,7 @@ public:
 	}
 
 	void drawCount(int pushCount) {
-		SetColor(WHITE);
+		textcolor(BLACK, WHITE);
 		gotoxy(40, 8);
 		cout << "PUSH COUNT : " << pushCount << endl;
 	}

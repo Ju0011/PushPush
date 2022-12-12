@@ -10,20 +10,23 @@ class View_Start
 {
 	
 public:
-	void logo()
+	int logo()
 	{
+		View* view = 0;
+		view->textcolor(BLUE, WHITE);
 		int i;
 
 		textbackground(BLUE);
+
 		for (i = 2; i < 15; i++)
 		{
 			gotoxy(4, i);
 			printf("                                                                                           ");
 		}
 
-		textbackground(GRAY);
+		
 		//1 還
-		View* view = 0;
+		textbackground(GRAY);
 		view->putstr(6,3, "            ");
 		view->putstr(51, 3, "            ");
 		Sleep(100);
@@ -230,20 +233,22 @@ public:
 		Sleep(100);
 
 		gotoxy(38, 20);
-		textbackground(BLACK);
+		view->textcolor(BLUE, WHITE);
 		cout << "  Please press ENTER!  " << endl;
 		
 		while (getchar() != '\n');
 		system("cls");
+		return 0;
 	}
 
 	int selectStage() {
+		system("cls");
 		int selectStage;
 
 		View* view = 0;
 
 		do {
-			view->SetColor(YELLOW);
+			view->textcolor(BLUE, WHITE);
 			view->putstr(32, 5, "旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
 			view->putstr(32, 7, "早  *************************  早");
 			view->putstr(32, 9, "早        SELECT STAGE!        早");
@@ -254,9 +259,10 @@ public:
 			cin >> selectStage;
 		} while (selectStage < 0 && selectStage > 6);
 	
-		//while (getchar() != '\n');
-		system("cls");
-
+		if (selectStage != NULL) {
+			system("cls");
+		}
+	
 		return selectStage;
 	}
 
@@ -264,8 +270,7 @@ public:
 		system("cls");
 		while (getchar() != '\n');
 		View* view = 0;
-
-		view->SetColor(YELLOW);
+		view->textcolor(BLUE, WHITE);
 		view->putstr(32, 5, "旨收收收收收收收收收收收收收收收收收收收收收收收收收收收收收旬");
 		view->putstr(32, 7, "早  *************************  早");
 		view->putstr(32, 9, "早          GAME EXIT!         早");
